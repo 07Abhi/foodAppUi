@@ -15,7 +15,14 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart(${currentUser.cart.length})'),
+        title: Text(
+          'Cart(${currentUser.cart.length})',
+          style: TextStyle(
+            letterSpacing: 1.0,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
       ),
       body: ListView.separated(
           itemBuilder: (context, index) {

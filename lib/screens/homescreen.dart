@@ -10,6 +10,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/icons/carticon.dart';
 
+List<String> restaurantSearch = [
+  'Restaurant 0',
+  'Restaurant 1',
+  'Restaurant 2',
+  'Restaurant 3',
+  'Restaurant 0'
+];
+
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
@@ -18,6 +26,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final textKey = GlobalKey<AutoCompleteTextFieldState>();
+  final _textController = TextEditingController();
+  final focus = FocusNode();
   Route _pageAnimationRestra(Restaurant restra) {
     return PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
@@ -39,122 +50,125 @@ class _HomePageState extends State<HomePage> {
 
   Route _pageAnimationCart() {
     return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => CartScreen(),
-        //transitionDuration: Duration(milliseconds: 500),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = Offset(0.0, 1.0);
-          var end = Offset.zero;
-          var curve = Curves.easeInExpo;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          var offsetAnimation = animation.drive(tween);
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
-        });
+      pageBuilder: (context, animation, secondaryAnimation) => CartScreen(),
+      //transitionDuration: Duration(milliseconds: 500),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInOut;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 
   Route _pageAnimationProfile() {
     return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryanimation) => Profile(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = Offset(0.0, 1.0);
-          var end = Offset.zero;
-          var curve = Curves.easeOutBack;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          var offSetAnimation = animation.drive(tween);
-          return SlideTransition(
-            position: offSetAnimation,
-            child: child,
-          );
-        });
+      pageBuilder: (context, animation, secondaryanimation) => Profile(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeOutBack;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offSetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offSetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 
-  final textKey = GlobalKey<AutoCompleteTextFieldState>();
   _buildRestuarantsList() {
     List<Widget> restroList = [];
-    restaurants.forEach((Restaurant restra) {
-      restroList.add(
-        GestureDetector(
-          onTap: () => Navigator.push(context, _pageAnimationRestra(restra)),
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(width: 1.0, color: Colors.grey.shade300),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 5.0, vertical: 5.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Hero(
-                      tag: restra.imageUrl,
-                      child: Image(
-                        image: AssetImage(restra.imageUrl),
-                        height: 150.0,
-                        width: 150.0,
-                        fit: BoxFit.cover,
+    restaurants.forEach(
+      (Restaurant restra) {
+        restroList.add(
+          GestureDetector(
+            onTap: () => Navigator.push(context, _pageAnimationRestra(restra)),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(width: 1.0, color: Colors.grey.shade300),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 5.0, vertical: 5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Hero(
+                        tag: restra.imageUrl,
+                        child: Image(
+                          image: AssetImage(restra.imageUrl),
+                          height: 150.0,
+                          width: 150.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 7.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          restra.name,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).accentColor,
-                              fontSize: 18.0),
-                        ),
-                        SizedBox(height: 5.0),
-                        RatingStar(
-                          rating: restra.rating,
-                          starSize: 16.0,
-                        ),
-                        SizedBox(height: 5.0),
-                        Text(
-                          'Nearby Place',
-                          style: TextStyle(
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade500,
-                              fontSize: 16.0),
-                        ),
-                        SizedBox(height: 5.0),
-                        Text(
-                          'Distance from near by',
-                          style: TextStyle(
-                              fontFamily: 'Ubuntu',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade500,
-                              fontSize: 16.0),
-                        ),
-                      ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            restra.name,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).accentColor,
+                                fontSize: 18.0),
+                          ),
+                          SizedBox(height: 5.0),
+                          RatingStar(
+                            rating: restra.rating,
+                            starSize: 16.0,
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            'Nearby Place Name',
+                            style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade500,
+                                fontSize: 16.0),
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            '0 Km away',
+                            style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade500,
+                                fontSize: 16.0),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
     return Column(
       children: restroList,
     );
@@ -196,13 +210,20 @@ class _HomePageState extends State<HomePage> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
             child: AutoCompleteTextField(
+              focusNode: focus,
+              clearOnSubmit: false,
+              controller: _textController,
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.search,
                   color: Colors.black45,
                 ),
-                suffixIcon: Icon(
-                  Icons.clear,
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    // Focus.of(context).unfocus();
+                    _textController.clear();
+                  },
                   color: Colors.black45,
                 ),
                 hintText: 'Search Resautrant',
@@ -219,12 +240,21 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(width: 2.0, color: Colors.yellow)),
               ),
-              itemSubmitted: (suggestin) {},
+              itemSubmitted: (suggestion) {},
               key: textKey,
-              suggestions: null,
-              itemBuilder: null,
-              itemSorter: null,
-              itemFilter: null,
+              suggestions: restaurantSearch,
+              itemBuilder: (context, suggestion) {
+                return ListTile(
+                  title: Text(suggestion),
+                  trailing: Text('x km away'),
+                );
+              },
+              itemFilter: (item, query) {
+                return item.toLowerCase().startsWith(query.toLowerCase());
+              },
+              itemSorter: (a, b) {
+                return a.compareTo(b);
+              },
             ),
           ),
           Recents(),
