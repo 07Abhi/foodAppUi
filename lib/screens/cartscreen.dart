@@ -25,17 +25,78 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) {
+        itemBuilder: (context, index) {
+          if (index < currentUser.cart.length) {
             Order orders = currentUser.cart[index];
             return CartTiles(orders);
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider(
-              height: 1.0,
-              color: Colors.grey.shade800,
-            );
-          },
-          itemCount: currentUser.cart.length),
+          }
+          return Column(
+            children: [
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'ETA',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      'X min',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total Bill',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.green),
+                    ),
+                    Text(
+                      '₹ X',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            height: 1.0,
+            color: Colors.grey.shade800,
+          );
+        },
+        itemCount: currentUser.cart.length + 1,
+      ),
+      bottomSheet: Container(
+        height: 70,
+        width: MediaQuery.of(context).size.width,
+      ),
     );
   }
 }
