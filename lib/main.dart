@@ -1,4 +1,4 @@
-import 'screens/homescreen.dart';
+import 'screens/splashpage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xffba0020),
           accentColor: Color(0xffee2737),
           fontFamily: 'JosefinSans'),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

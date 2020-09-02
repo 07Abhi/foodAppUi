@@ -31,21 +31,22 @@ class _HomePageState extends State<HomePage> {
   final focus = FocusNode();
   Route _pageAnimationRestra(Restaurant restra) {
     return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            RestaurantScreen(restaurant: restra),
-        //transitionDuration: Duration(milliseconds: 500),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = Offset(0.0, 1.0);
-          var end = Offset.zero;
-          var curve = Curves.easeInExpo;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          var offsetAnimation = animation.drive(tween);
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
-        });
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          RestaurantScreen(restaurant: restra),
+      //transitionDuration: Duration(milliseconds: 500),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.easeInExpo;
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    );
   }
 
   Route _pageAnimationCart() {

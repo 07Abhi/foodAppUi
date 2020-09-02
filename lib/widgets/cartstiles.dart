@@ -90,6 +90,7 @@ class _CartTilesState extends State<CartTiles> {
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black87,
+                                  
                                 ),
                               ),
                               IconButton(
