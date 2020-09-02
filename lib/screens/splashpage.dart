@@ -10,6 +10,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  int wallpaperNo = 1;
   _pageAnimationBuilder() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
@@ -45,47 +46,59 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: TyperAnimatedTextKit(
-                  text: ['Foodiezzz'],
-                  textStyle: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.start,
-                  speed: Duration(
-                    milliseconds: 200,
-                  ),
-                  isRepeatingAnimation: false,
-                ),
-              ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/splash2.jpg'),
+                  fit: BoxFit.cover),
             ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Text(
-                    'Developer Inc.',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white70,
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: TyperAnimatedTextKit(
+                      text: ['Foodiezzz'],
+                      textStyle: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.start,
+                      speed: Duration(
+                        milliseconds: 200,
+                      ),
+                      isRepeatingAnimation: false,
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Text(
+                        'Developer Inc.',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

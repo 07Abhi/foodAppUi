@@ -16,6 +16,7 @@ dependencies:
   autocomplete_textfield: ^1.7.3
   toast: ^0.1.5
   animated_text_kit: ^2.2.0
+  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:

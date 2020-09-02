@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: Color(0xffba0020),
-          accentColor: Color(0xffee2737),
-          fontFamily: 'JosefinSans'),
+        primaryColor: Color(0xffba0020),
+        accentColor: Color(0xffee2737),
+        fontFamily: 'JosefinSans',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: SplashScreen(),
     );
   }

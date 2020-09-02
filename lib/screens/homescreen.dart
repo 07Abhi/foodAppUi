@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_food_delivery_ui/screens/cartscreen.dart';
 import 'package:flutter_food_delivery_ui/screens/profile.dart';
 import 'package:flutter_food_delivery_ui/screens/restaurantscreen.dart';
@@ -15,7 +16,6 @@ List<String> restaurantSearch = [
   'Restaurant 1',
   'Restaurant 2',
   'Restaurant 3',
-  'Restaurant 0'
 ];
 
 class HomePage extends StatefulWidget {
@@ -241,7 +241,9 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(width: 2.0, color: Colors.yellow)),
               ),
-              itemSubmitted: (suggestion) {},
+              itemSubmitted: (suggestion) {
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+              },
               key: textKey,
               suggestions: restaurantSearch,
               itemBuilder: (context, suggestion) {
