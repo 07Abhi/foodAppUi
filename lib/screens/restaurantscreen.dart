@@ -181,15 +181,13 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             child: GridView.count(
               physics: BouncingScrollPhysics(),
               crossAxisCount: 2,
+              mainAxisSpacing: 15.0,
+              crossAxisSpacing: 10.0,
               children: List.generate(
                 widget.restaurant.menu.length,
                 (index) {
                   Food food = widget.restaurant.menu[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15.0, vertical: 10.0),
-                    child: MenuStackTiles(food),
-                  );
+                  return MenuStackTiles(food);
                 },
               ),
             ),
