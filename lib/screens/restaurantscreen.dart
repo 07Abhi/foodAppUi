@@ -186,7 +186,8 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 (index) {
                   Food food = widget.restaurant.menu[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 10.0),
                     child: MenuStackTiles(food),
                   );
                 },
