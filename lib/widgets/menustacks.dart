@@ -70,7 +70,7 @@ class _MenuStackTilesState extends State<MenuStackTiles> {
                   fontSize: 20.0,
                   color: Colors.white,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -88,7 +88,7 @@ class _MenuStackTilesState extends State<MenuStackTiles> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

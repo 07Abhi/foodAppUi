@@ -54,48 +54,53 @@ class _CartTilesState extends State<CartTiles> {
                           widget.order.restaurant.name,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
+                            letterSpacing: 1.0,
                             fontSize: 16.0,
-                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade800,
                           ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
                         ),
                         Container(
                           height: 30.0,
-                          width: 135.0,
+                          width: 132,
                           decoration: BoxDecoration(
+                            border:
+                                Border.all(width: 1.0, color: Colors.black54),
                             borderRadius: BorderRadius.circular(10.0),
-                            border: Border.all(
-                              width: 1.0,
-                              color: Colors.black54,
-                            ),
                           ),
-                          child: Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                    icon: Icon(
-                                      Icons.remove,
-                                      size: 15.0,
-                                      color: Theme.of(context).accentColor,
-                                    ),
-                                    onPressed: () {}),
-                                Text(
-                                  widget.order.quantity.toString(),
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                  ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove,
+                                  size: 17.0,
+                                  color: Theme.of(context).accentColor,
                                 ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.add,
-                                    size: 15.0,
-                                    color: Theme.of(context).accentColor,
-                                  ),
-                                  onPressed: () {},
+                                onPressed: () {},
+                              ),
+                              Text(
+                                '${widget.order.quantity}',
+                                style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
-                              ],
-                            ),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add,
+                                  size: 17.0,
+                                  color: Theme.of(context).accentColor,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
                         )
                       ],
@@ -118,4 +123,3 @@ class _CartTilesState extends State<CartTiles> {
     );
   }
 }
-//₹
